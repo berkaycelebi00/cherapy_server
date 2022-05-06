@@ -1,0 +1,32 @@
+{
+  "name": "cherapy_server",
+  "version": "1.0.0",
+  "description": "Web server for Cherapy app for graduation project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berkaycelebi00/cherapy_server.git"
+  },
+  "author": "Berkay Çelebi, Sünbül Kübra Yazıcı",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berkaycelebi00/cherapy_server/issues"
+  },
+  "homepage": "https://github.com/berkaycelebi00/cherapy_server#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.19.0"
+  }
+}
