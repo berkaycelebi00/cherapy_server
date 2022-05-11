@@ -5,12 +5,15 @@ import { db } from './models/index.js';
 import errorHandler from "./middlewares/error/error_handler.js";
 import cors from 'cors';
 import dotenv from 'dotenv'
+import fileUpload from "express-fileupload";
 
 
 dotenv.config()
 const app = express();
 
 app.use(cors())
+app.use(fileUpload())
+app.use('/public', express.static('public'))
 
 const PORT = process.env.PORT;
 
@@ -23,9 +26,10 @@ app.use("/api", routers);
 
 app.use(errorHandler);
 const Role = db.role;
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync Db');
-  initial();
+  //initial()
+
 });
 function initial() {
   Role.create({
@@ -35,7 +39,7 @@ function initial() {
  
   Role.create({
     id: 2,
-    name: "moderator"
+    name: "professional"
   });
  
   Role.create({

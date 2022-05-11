@@ -15,7 +15,7 @@ const login = asyncErrorWrapper(async (req, res) => {
         }
     })
     if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({success:false, message: "User Not found." });
     }
     var passwordIsValid = bcryptjs.compareSync(
         req.body.password,
@@ -24,6 +24,7 @@ const login = asyncErrorWrapper(async (req, res) => {
     if (!passwordIsValid) {
         return res.status(401).send({
             accessToken: null,
+            success:"false",
             message: "Invalid Password!"
         });
     }
@@ -37,9 +38,11 @@ const login = asyncErrorWrapper(async (req, res) => {
         }
         res.status(200).send({
             id: user.id,
+            success:true,
             username: user.username,
             email: user.email,
             roles: authorities,
+            isVolunteer:user.isVolunteer,
             accessToken: token
         });
     });
@@ -61,18 +64,33 @@ const register = asyncErrorWrapper(async (req, res) => {
             }
         })
         user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
+            res.send({success:true, message: "User was registered successfully!" });
         });
     } else {
         // user role = 1
         user.setRoles([1]).then(() => {
-            res.send({ message: "User was registered successfully!" });
+            res.send({success:true, message: "User was registered successfully!" });
         });
     }
 })
 
+const setVolunteer = asyncErrorWrapper(async (req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const gender = req.body.gender;
+    const result = await User.update({isVolunteer:1,name,surname,gender},{where:{id}})
+    res.status(200).json({
+        success:true,
+        message: "You are now a volunteer"
+    })
+})
+
+
+
 
 export {
     login,
-    register
+    register,
+    setVolunteer
 }

@@ -11,5 +11,19 @@ export default sequelize.define("user", {
     password: {
         type: Sequelize.STRING
     },
+    isVolunteer:{
+        type: Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue:0
+    },
+    name:{
+        type:Sequelize.STRING
+    },
+    surname: {
+        type: Sequelize.STRING
+    },
+    gender:{
+        type: Sequelize.STRING
+    }
 
 });
