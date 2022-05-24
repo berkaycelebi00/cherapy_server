@@ -6,7 +6,7 @@ import {verifySignUp} from "../middlewares/verifySignUp.js";
 
 const router = Router();
 
-router.post("/",[upload.any()], createContent);
+router.post("/",[upload.single("file")], createContent);
 router.delete("/",deleteContent);
 router.get("/",findAll)
 

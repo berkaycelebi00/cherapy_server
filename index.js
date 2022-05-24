@@ -5,14 +5,12 @@ import { db } from './models/index.js';
 import errorHandler from "./middlewares/error/error_handler.js";
 import cors from 'cors';
 import dotenv from 'dotenv'
-import fileUpload from "express-fileupload";
 
 
 dotenv.config()
 const app = express();
 
 app.use(cors())
-app.use(fileUpload())
 app.use('/public', express.static('public'))
 
 const PORT = process.env.PORT;

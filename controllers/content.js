@@ -6,12 +6,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const createContent = asyncErrorWrapper(async (req, res) => {
-    console.log(req)
-    console.log(req.body)
+
     res.status(200).send({
         id:"sa"
     });
-
 })
 
 const findAll = asyncErrorWrapper(async (req, res) => {

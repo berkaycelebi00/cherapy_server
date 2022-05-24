@@ -12,6 +12,7 @@ const storage = diskStorage({
         cb(null, rootDir);
     },
     filename: function (req, file, cb) {
+
         const extension = file.mimetype.split("/")[1];
         if (req.body["change" + file.fieldname]) {
             unlink(join(dirname(__filename) + "/../..", req.body["change" + file.fieldname]), (err) => { console.log(err) });

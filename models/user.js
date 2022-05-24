@@ -17,10 +17,12 @@ export default sequelize.define("user", {
         defaultValue:0
     },
     name:{
-        type:Sequelize.STRING
+        type:Sequelize.STRING,
+        defaultValue:"Anonymous"
     },
     surname: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue:""
     },
     gender:{
         type: Sequelize.STRING
