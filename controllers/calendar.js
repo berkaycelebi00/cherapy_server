@@ -10,10 +10,7 @@ dotenv.config()
 const findCalendarsByProfId = asyncErrorWrapper(async (req, res) => {
     const profId = req.params.profId;
     const result = await Calendar.findAll({
-        include:[
-            {association:db.ad,attributes:["name","surname","id"]},
-            
-        ],
+
         where:{
             professionalId:profId
         }
@@ -24,13 +21,7 @@ const findCalendarsByProfId = asyncErrorWrapper(async (req, res) => {
      })
 })
 const addNewCalendar = asyncErrorWrapper(async (req, res) => {
-    const id = req.params.profId;
-    const imgUrl = req.file.filename.split("/")[req.file.filename.split("/").length-1]
-    const result = await Calendar.update({imageUrl:imgUrl},{
-        where:{
-            professionalId:id
-        }
-    })
+    const result = await Calendar.create(req.body)
     res.status(200).json({
         success: true,
         result
@@ -38,11 +29,10 @@ const addNewCalendar = asyncErrorWrapper(async (req, res) => {
 })
 
 const deleteCalendar = asyncErrorWrapper(async (req, res) => {
-    const id = req.params.profId;
-    const imgUrl = req.file.filename.split("/")[req.file.filename.split("/").length-1]
-    const result = await Calendar.update({imageUrl:imgUrl},{
+    const id = req.params.calendarId;
+    const result = await Calendar.destroy({
         where:{
-            professionalId:id
+            id
         }
     })
     res.status(200).json({

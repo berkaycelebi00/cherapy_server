@@ -24,11 +24,11 @@ const findAdByProfId = asyncErrorWrapper(async (req, res) => {
      })
 })
 const addProfAdImage = asyncErrorWrapper(async (req, res) => {
-    const id = req.params.profId;
+    const id = req.params.adId;
     const imgUrl = req.file.filename.split("/")[req.file.filename.split("/").length-1]
     const result = await Advertisement.update({imageUrl:imgUrl},{
         where:{
-            professionalId:id
+            id
         }
     })
     res.status(200).json({
