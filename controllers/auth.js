@@ -41,8 +41,11 @@ const login = asyncErrorWrapper(async (req, res) => {
             success:true,
             username: user.username,
             email: user.email,
+            name:user.name,
+            surname:user.surname,
             roles: authorities,
             isVolunteer:user.isVolunteer,
+            photoAddress:user.photoAddress,
             accessToken: token
         });
     });

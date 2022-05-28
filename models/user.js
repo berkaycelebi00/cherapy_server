@@ -26,6 +26,10 @@ export default sequelize.define("user", {
     },
     gender:{
         type: Sequelize.STRING
+    },
+    photoAddress:{
+        type:Sequelize.STRING,
+        defaultValue:"default.jpg"
     }
 
 });
