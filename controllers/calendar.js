@@ -17,7 +17,7 @@ const findCalendarsByProfId = asyncErrorWrapper(async (req, res) => {
      })
      res.status(200).json({
          success: true,
-         "ads":result
+         "calendars":result
      })
 })
 const addNewCalendar = asyncErrorWrapper(async (req, res) => {
@@ -41,9 +41,22 @@ const deleteCalendar = asyncErrorWrapper(async (req, res) => {
     })
 })
 
+const updateCalendarById = asyncErrorWrapper(async (req, res) => {
+    const id = req.params.calendarId;
+    const result = await Calendar.update(req.body,{
+        where:{
+            id
+        }
+    })
+    res.status(200).json({
+        success: true,
+        result
+    })
+})
 
 export {
     findCalendarsByProfId,
     addNewCalendar,
     deleteCalendar,
+    updateCalendarById
 }

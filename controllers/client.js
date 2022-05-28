@@ -18,7 +18,7 @@ const findProfAll = asyncErrorWrapper(async (req, res) => {
             },
             {
                 association: db.clientUser,
-                attributes: ["name", "surname", "id"]
+                attributes: ["name", "surname", "id","gender"]
             }
         ], where: {
             professionalId: req.params.id
