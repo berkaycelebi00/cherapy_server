@@ -90,10 +90,39 @@ const setVolunteer = asyncErrorWrapper(async (req, res) => {
 })
 
 
+const updateProfile = asyncErrorWrapper(async (req, res) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const email = req.body.email;
+    const result = await User.update({name,surname,email},{where:{id}})
+    console.log(id)
+    res.status(200).json({
+        success:true,
+        message: result
+    })
+})
+
+const updateProfilePhoto  = asyncErrorWrapper(async (req, res) => {
+    const id = req.params.id;
+    const imgUrl = req.file.filename.split("/")[req.file.filename.split("/").length-1]
+    const result = await User.update({photoAddress:imgUrl},{
+        where:{
+            id
+        }
+    })
+    res.status(200).json({
+        success: true,
+        result
+    })
+})
+
 
 
 export {
     login,
     register,
-    setVolunteer
+    setVolunteer,
+    updateProfile,
+    updateProfilePhoto
 }
