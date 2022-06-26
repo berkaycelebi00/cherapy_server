@@ -5,10 +5,7 @@ import { db } from './models/index.js';
 import errorHandler from "./middlewares/error/error_handler.js";
 import cors from 'cors';
 import dotenv from 'dotenv'
-import { createServer } from "http";
-import  {Server}  from "socket.io";
-
-
+import {httpServer} from "./socket.js";
 
 dotenv.config()
 const app = express();
@@ -48,54 +45,15 @@ function initial() {
     name: "admin"
   });
 }
-const httpServer = createServer();
-const io = new Server(httpServer, {
-
-});
-
-io.on('connection', function (client) {
-
-  console.log('client connect...', client.id);
-
-  client.on('typing', function name(data) {
-    console.log(data);
-    io.emit('typing', data)
-    
-  })
-
-  client.on('join-as-listener',(id)=>{
-    console.log(id+" joined as listener")
-  })
-
-  client.on('message', function name(data) {
-    console.log(data);
-    io.emit('message', data)
-  })
-
-  client.on('location', function name(data) {
-    console.log(data);
-    io.emit('location', data);
-  })
-
-  client.on('connect', function () {
-  })
-
-  client.on('disconnect', function () {
-    console.log('client disconnect...', client.id)
-    // handleDisconnect()
-  })
-
-  client.on('error', function (err) {
-    console.log('received error from client:', client.id)
-    console.log(err)
-  })
-})
-
-
 
 app.listen(PORT, () => {
   console.log(`Cherapy app listening on port ${PORT}`)
 })
+
+
+
+
+
 
 httpServer.listen(3001,function (err) {
   if (err) throw err
